@@ -37,7 +37,7 @@ final class CombineUrlSessionDownloaderTests: XCTestCase {
             }
             .store(in: &self.cancellable)
         
-        wait(for: [downloadExpectation], timeout: 10)
+        wait(for: [downloadExpectation], timeout: 20)
     }
     
     func testFailure() throws {
@@ -67,6 +67,6 @@ final class CombineUrlSessionDownloaderTests: XCTestCase {
             }
             .store(in: &self.cancellable)
         
-        wait(for: [downloadExpectation], timeout: 10)
+        wait(for: [downloadExpectation], timeout: 20)
     }
 }

@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CombineUrlSessionDownloader'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'an URLSession Extension to download stuff using Combine'
 
   s.description      = <<-DESC

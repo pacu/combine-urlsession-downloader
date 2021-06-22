@@ -64,6 +64,22 @@ extension URLSession {
                     self?.subscriber?.receive(completion: .failure(URLError(.badServerResponse)))
                     return
                 }
+                
+                if let httpResponse = response as? HTTPURLResponse, !(200 ..< 299).contains(httpResponse.statusCode)  {
+                    switch httpResponse.statusCode {
+                    case 200 ..< 299:
+                        break
+                    case 300 ..< 399:
+                        self?.subscriber?.receive(completion: .failure(URLError(.httpTooManyRedirects)))
+                    case 400 ..< 499:
+                        self?.subscriber?.receive(completion: .failure(URLError(.fileDoesNotExist)))
+                    case 500 ..< 599:
+                        self?.subscriber?.receive(completion: .failure(URLError(.badServerResponse)))
+                    default:
+                        self?.subscriber?.receive(completion: .failure(URLError(.badServerResponse)))
+                    }
+                }
+                
                 guard let url = url else {
                     self?.subscriber?.receive(completion: .failure(URLError(.badURL)))
                     return
